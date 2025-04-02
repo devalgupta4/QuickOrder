@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640963125267",
+    "project_id": "quickorder-2bba4",
+    "storage_bucket": "quickorder-2bba4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640963125267:android:d318bbd0c511be88a21fe6",
+        "android_client_info": {
+          "package_name": "com.example.quickorder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAhpTLEBJ0O23BMkaDiDmr6cMusc-1a6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
