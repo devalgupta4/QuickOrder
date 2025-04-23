@@ -1,32 +1,52 @@
 package com.example.quickorder.ui.screens
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.quickorder.viewmodel.OrderViewModel
 
 @Composable
-fun OrderSummaryScreen(navController: NavHostController, orderViewModel: OrderViewModel) {
-    val context = LocalContext.current
-    val orderSummary by remember { mutableStateOf(orderViewModel.getOrderSummary()) }
+fun OrderSummaryScreen(
+    navController: NavHostController,
+    orderViewModel: OrderViewModel,
+    restaurantId: String
+) {
+    val cartState by orderViewModel.cart.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(text = orderSummary, style = MaterialTheme.typography.bodyLarge)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
+        Text("Order Summary", style = MaterialTheme.typography.titleLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-            val upiUri = Uri.parse("upi://pay?pa=merchant@upi&pn=QuickOrder&mc=1234&tid=123456789&tr=123456&tn=Order%20Payment&am=50&cu=INR")
-            val intent = Intent(Intent.ACTION_VIEW, upiUri)
-            context.startActivity(intent)
-        }) {
-            Text("Pay with UPI")
+        LazyColumn {
+            items(cartState.items) { item ->
+                Text("${item.dish.name} x ${item.quantity} = ₹${item.dish.price * item.quantity}")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Total: ₹${cartState.totalAmount()}")
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                orderViewModel.placeOrder(restaurantId)
+                navController.navigate("orders")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Place Order")
         }
     }
 }

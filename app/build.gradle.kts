@@ -55,6 +55,14 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.material3)
 
+        // Add the Accompanist SwipeRefresh dependency
+
+        implementation( libs.accompanist.swiperefresh.v0332alpha)
+
+
+
+
+
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
@@ -65,6 +73,7 @@ dependencies {
     // QR Code Generator
     implementation(libs.android)
     implementation(libs.androidx.compose.compiler)
+    implementation(libs.androidx.material.icons.extended)
 
 
     testImplementation(libs.junit)
