@@ -203,7 +203,7 @@ class OrderViewModel : ViewModel() {
                 timestamp = doc.getTimestamp("timestamp") ?: Timestamp.now()
             )
         } catch (e: Exception) {
-            println("❌ Failed to parse order: ${e.message}")
+            println("Failed to parse order: ${e.message}")
             null
         }
     }
